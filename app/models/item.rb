@@ -7,8 +7,7 @@ class Item < ApplicationRecord
     validates :shipping_fee_status_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
     validates :prefecture_id, presence: true, numericality: { other_than: 0 , message: "can't be blank"}
     validates :scheduled_delivery_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
-    validates :price, presence: true, numericality: { in: 300..9999999 }, format: { with: /\A[0-9]+\z/ }
-    validates :user, presence: true
+    validates :price, presence: true, numericality: { in: 300..9999999 , only_integer: true }
     
     #has_one :order
     belongs_to :user
