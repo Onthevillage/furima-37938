@@ -37,6 +37,74 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
+      it 'sales_status_idが空では登録できない' do
+        @item.sales_status_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Sales status can't be blank")
+      end
+      it 'sales_status_idが1では登録できない' do
+        @item.sales_status_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Sales status can't be blank")
+      end
+      it 'shipping_fee_status_idが空では登録できない' do
+        @item.shipping_fee_status_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping fee status can't be blank")
+      end
+      it 'shipping_fee_status_idが1では登録できない' do
+        @item.shipping_fee_status_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping fee status can't be blank")
+      end
+      it 'prefecture_idが空では登録できない' do
+        @item.prefecture_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+      end
+      it 'prefecture_idが0では登録できない' do
+        @item.prefecture_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+      end
+      it 'scheduled_delivery_idが空では登録できない' do
+        @item.scheduled_delivery_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Scheduled delivery can't be blank")
+      end
+      it 'scheduled_delivery_idが1では登録できない' do
+        @item.scheduled_delivery_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Scheduled delivery can't be blank")
+      end
+      it 'priceが空では登録できない' do
+        @item.price = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it 'priceが数値以外では登録できない' do
+        @item.price = 'あ'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
+
+      it 'priceが300より小さい場合では登録できない' do
+        @item.price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include("")
+      end
+      it 'priceが9999999より大きい場合では登録できない' do
+        @item.price = 10000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("")
+      end
+      it 'priceが整数ではない場合では登録できない' do
+        @item.price = 304.8
+        @item.valid?
+        expect(@item.errors.full_messages).to include("")
+      end
+
     end
   end
 end
