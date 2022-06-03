@@ -85,26 +85,23 @@ RSpec.describe Item, type: :model do
       it 'priceが数値以外では登録できない' do
         @item.price = 'あ'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include("Price is invalid")
       end
-
-
       it 'priceが300より小さい場合では登録できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("")
+        expect(@item.errors.full_messages).to include("Price is invalid")
       end
       it 'priceが9999999より大きい場合では登録できない' do
         @item.price = 10000000
         @item.valid?
-        expect(@item.errors.full_messages).to include("")
+        expect(@item.errors.full_messages).to include("Price is invalid")
       end
       it 'priceが整数ではない場合では登録できない' do
-        @item.price = 304.8
+        @item.price = 3024.74
         @item.valid?
-        expect(@item.errors.full_messages).to include("")
+        expect(@item.errors.full_messages).to include("Price is invalid")
       end
-
     end
   end
 end

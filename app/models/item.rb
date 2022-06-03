@@ -7,7 +7,7 @@ class Item < ApplicationRecord
     validates :shipping_fee_status_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
     validates :prefecture_id, presence: true, numericality: { other_than: 0 , message: "can't be blank"}
     validates :scheduled_delivery_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
-    validates :price, presence: true, numericality: { in: 300..9999999 , only_integer: true }
+    validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid"}
     
     #has_one :order
     belongs_to :user
