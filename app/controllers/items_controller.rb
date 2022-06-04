@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
   end
 
   def only_to_item_user
-    unless user_signed_in? && current_user.id == @item.user.id
+    unless current_user.id == @item.user.id
       redirect_to items_path
     end
   end
