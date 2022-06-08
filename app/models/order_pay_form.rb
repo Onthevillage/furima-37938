@@ -4,11 +4,11 @@ class OrderPayForm
 
     validates :user_id, presence: true
     validates :item_id, presence: true
-    validates :postal_code, presence: true
+    validates :postal_code, presence: true, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :prefecture_id, presence: true
     validates :city, presence: true
     validates :addresses, presence: true
-    validates :phone_number, presence: true
+    validates :phone_number, presence: true, format: {with: /\A\d{10,11}\z/, message: "is invalid. Input only number"}
 
     def save
         order = Order.create(user_id: user_id, item_id: item_id)
