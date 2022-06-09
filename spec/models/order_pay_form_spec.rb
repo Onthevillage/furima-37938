@@ -56,7 +56,17 @@ RSpec.describe OrderPayForm, type: :model do
         expect(@order_pay_form.errors.full_messages).to include("Phone number can't be blank")
       end
       it 'phone_numberがハイフンを含んでいると購入できない' do
-        @order_pay_form.phone_number = '123-4567-890'
+        @order_pay_form.phone_number = '03-6406-6000'
+        @order_pay_form.valid?
+        expect(@order_pay_form.errors.full_messages).to include("Phone number is invalid. Input only number")
+      end
+      it 'phone_numberが9桁以下だと購入できない' do
+        @order_pay_form.phone_number = '110'
+        @order_pay_form.valid?
+        expect(@order_pay_form.errors.full_messages).to include("Phone number is invalid. Input only number")
+      end
+      it 'phone_numberが12桁以上だと購入できない' do
+        @order_pay_form.phone_number = '810364066000'
         @order_pay_form.valid?
         expect(@order_pay_form.errors.full_messages).to include("Phone number is invalid. Input only number")
       end
