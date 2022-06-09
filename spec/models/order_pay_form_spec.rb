@@ -13,6 +13,10 @@ RSpec.describe OrderPayForm, type: :model do
       it 'バリデーションに引っ掛からなければ購入できる' do
         expect(@order_pay_form).to be_valid
       end
+      it 'buildingが空でも購入できる' do
+        @order_pay_form.building = nil
+        expect(@order_pay_form).to be_valid
+      end
     end
     context '商品購入できない場合' do
       it 'userが紐付いていなければ購入できない' do
