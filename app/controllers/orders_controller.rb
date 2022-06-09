@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
+    before_action :authenticate_user!, only: [:index, :create]
     before_action :set_item, only: [:index, :create]
-
+    before_action :soldout, only: [:index, :create]
+    before_action :itemuser_order_back, only: [:index, :create]
 
     def index
         @order_pay_form = OrderPayForm.new
@@ -33,5 +35,17 @@ class OrdersController < ApplicationController
         card: order_pay_form_params[:token],
         currency: 'jpy' 
       )
+    end
+
+    def soldout
+      unless @item.order.nil?
+        redirect_to root_path
+      end
+    end
+
+    def itemuser_order_back
+      if current_user.id == @item.user.id
+        redirect_to root_path
+      end
     end
 end
