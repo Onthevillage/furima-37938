@@ -35,8 +35,8 @@ RSpec.describe OrderPayForm, type: :model do
         @order_pay_form.valid?
         expect(@order_pay_form.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
       end
-      it 'prefecture_idが空では購入できない' do
-        @order_pay_form.prefecture_id = ''
+      it 'prefecture_idが0では購入できない' do
+        @order_pay_form.prefecture_id = 0
         @order_pay_form.valid?
         expect(@order_pay_form.errors.full_messages).to include("Prefecture can't be blank")
       end
